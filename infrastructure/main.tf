@@ -51,6 +51,6 @@ resource "azurerm_storage_account" "example" {
   location                 = var.region
   account_tier             = "Standard"
   account_replication_type = "LRS"
-  account_kind             = "BlobStorage"
+  account_kindgre             = "BlobStorage"
   access_tier              = "Cool"
 }

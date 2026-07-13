@@ -16,6 +16,15 @@ terraform {
 
 }
 
+# Define providers and their config params
+provider "azurerm" {
+  # Leave the features block empty to accept all defaults
+  features {}
+}
+
+provider "cloudinit" {
+  # Configuration options
+}
 
 variable "labelPrefix" {
   type    = string
@@ -37,11 +46,11 @@ resource "azurerm_resource_group" "main" {
 }
 
 resource "azurerm_storage_account" "example" {
-  name                          = "${var.labelPrefix}storage"
-  resource_group_name           = azurerm_resource_group.main.name
-  location                      = var.region
-  account_tier                  = "Standard"
-  account_replication_type      = "LRS"
-  account_kind                  = "BlobStorage"
-  access_tier                   = "Cold"
+  name                     = "${var.labelPrefix}storage"
+  resource_group_name      = azurerm_resource_group.main.name
+  location                 = var.region
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  account_kind             = "BlobStorage"
+  access_tier              = "Cool"
 }

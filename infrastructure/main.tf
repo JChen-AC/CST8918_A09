@@ -39,7 +39,7 @@ resource "azurerm_resource_group" "main" {
   name     = "${var.labelPrefix}-A06-RG"
   location = var.region
   tags = {
-    Class      = "dev"
+    Class      = "CST8918"
     Assignment = "Lab"
     Lab        = "A06"
   }

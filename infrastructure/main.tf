@@ -1,0 +1,47 @@
+# Configure the Terraform runtime requirements.
+terraform {
+  required_version = ">= 1.1.0"
+
+  required_providers {
+    # Azure Resource Manager provider and version
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.0.2"
+    }
+    cloudinit = {
+      source  = "hashicorp/cloudinit"
+      version = "~> 2.3"
+    }
+  }
+
+}
+
+
+variable "labelPrefix" {
+  type    = string
+  default = "testlab"
+}
+variable "region" {
+  type    = string
+  default = "canadacentral"
+}
+
+resource "azurerm_resource_group" "main" {
+  name     = "${var.labelPrefix}-A06-RG"
+  location = var.region
+  tags = {
+    Class      = "dev"
+    Assignment = "Lab"
+    Lab        = "A06"
+  }
+}
+
+resource "azurerm_storage_account" "example" {
+  name                          = "${var.labelPrefix}storage"
+  resource_group_name           = azurerm_resource_group.main.name
+  location                      = var.region
+  account_tier                  = "Standard"
+  account_replication_type      = "LRS"
+  account_kind                  = "BlobStorage"
+  access_tier                   = "Cold"
+}
